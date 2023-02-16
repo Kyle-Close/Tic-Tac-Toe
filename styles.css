@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Julee&display=swap");
+
+body {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Julee", cursive;
+  background-color: #404258;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  height: 75%;
+  width: 50%;
+  min-width: 750px;
+}
+
+.player {
+  align-self: center;
+  font-size: 2rem;
+  color: #ff4c29;
+}
+
+.game-board {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background-color: white;
+  gap: 5px;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  background-color: #404258;
+  color: white;
+}
+
+.square:hover {
+  opacity: 0.9;
+}

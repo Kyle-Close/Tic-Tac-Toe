@@ -38,12 +38,21 @@ class GameBoard {
       this.spots[index] = this.player2.letter;
     }
 
+    if (this.turn > 7) {
+      endGame();
+    }
+
     if (checkForWinner()) {
-      if (this.turn % 2 != 0) {
+      if (this.turn % 2 === 0) {
+        console.log(`${this.player1.name} wins!`);
         playerTurnDisplay.textContent = `${this.player1.name} wins!`;
+        endGame(this.player1);
       } else {
+        console.log(`${this.player2.name} wins!`);
         playerTurnDisplay.textContent = `${this.player2.name} wins!`;
+        endGame(this.player2);
       }
+
       return;
     }
 
@@ -73,17 +82,20 @@ function checkForWinner() {
   }
 
   for (let i = 0; i < winConditions.length; i++) {
+    let indexOne = winConditions[i][0];
+    let indexTwo = winConditions[i][1];
+    let indexThree = winConditions[i][2];
     if (
-      board.spots[winConditions[i][0]] === board.spots[winConditions[i][1]] &&
-      board.spots[winConditions[i][0]] === board.spots[winConditions[i][2]] &&
-      board.spots[i][0] != ""
+      board.spots[indexOne] === board.spots[indexTwo] &&
+      board.spots[indexOne] === board.spots[indexThree] &&
+      board.spots[indexOne] !== ""
     ) {
       return true;
     }
   }
 }
 
-const board = new GameBoard();
+let board = new GameBoard();
 
 displayPlayerTurn();
 
@@ -92,3 +104,15 @@ displayPlayerTurn();
     board.executeTurn(e);
   });
 });
+
+function endGame(winner) {
+  if (!winner) {
+    alert("tie");
+  } else {
+    alert(`${winner.name} wins!`);
+  }
+  board = new GameBoard();
+  [...gameBoardSquares].forEach((square) => {
+    square.textContent = "";
+  });
+}
